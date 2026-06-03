@@ -6,11 +6,8 @@ const nextBtn = document.getElementById("nextBtn");
 const autoBtn = document.getElementById("autoBtn");
 const stopBtn = document.getElementById("stopBtn");
 
-const greenCount =
-  document.getElementById("greenCount");
-
-const durationInput =
-  document.getElementById("duration");
+const greenCount = document.getElementById("greenCount");
+const durationInput = document.getElementById("duration");
 
 const selectedPlayer =
   document.getElementById("selectedPlayer");
@@ -19,7 +16,7 @@ let autoInterval = null;
 
 function randomPlayers(count) {
 
-  const players =
+  const availablePlayers =
     Array.from(
       { length: PLAYERS },
       (_, i) => i + 1
@@ -27,14 +24,22 @@ function randomPlayers(count) {
 
   const selected = [];
 
-  while (selected.length < count) {
+  while (
+    selected.length < count &&
+    availablePlayers.length > 0
+  ) {
 
-    const idx =
-      Math.floor(Math.random() * players.length);
+    const index =
+      Math.floor(
+        Math.random() *
+        availablePlayers.length
+      );
 
-    selected.push(players[idx]);
+    selected.push(
+      availablePlayers[index]
+    );
 
-    players.splice(idx, 1);
+    availablePlayers.splice(index, 1);
   }
 
   return selected;
@@ -57,7 +62,7 @@ async function nextRound() {
   );
 
   selectedPlayer.textContent =
-    `Green: ${greens.join(", ")}`;
+    `Green players: ${greens.join(", ")}`;
 }
 
 nextBtn.addEventListener(
@@ -89,6 +94,9 @@ stopBtn.addEventListener(
   () => {
 
     clearInterval(autoInterval);
+
+    selectedPlayer.textContent =
+      "Stopped";
 
   }
 );
