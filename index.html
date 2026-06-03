@@ -3,14 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <title>Football Scanning - Coach</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="coach.css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: white;
+      color: black;
+    }
+
+    button,
+    select,
+    input {
+      font-size: 20px;
+      margin: 10px;
+    }
+  </style>
 </head>
 
-<body style="flex-direction:column; background:white; color:black;">
+<body>
 
   <h1>Football Scanning</h1>
 
-  <label>
+  <label for="greenCount">
     Green Players
   </label>
 
@@ -23,7 +39,7 @@
 
   <br><br>
 
-  <label>
+  <label for="duration">
     Duration (seconds)
   </label>
 

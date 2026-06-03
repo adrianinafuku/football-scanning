@@ -4,22 +4,10 @@ html, body {
   height: 100%;
 }
 
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 15rem;
-  font-family: Arial, sans-serif;
-}
-
 .red {
   background-color: red;
 }
 
 .green {
   background-color: green;
-}
-
-#screen {
-  user-select: none;
 }
