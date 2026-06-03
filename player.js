@@ -1,39 +1,69 @@
-import { db, ref, onValue } from "./firebase.js";
+import { db, ref, onValue }
+from "./firebase.js";
 
-const screen = document.getElementById("screen");
+const screen =
+  document.getElementById("screen");
 
-const params = new URLSearchParams(window.location.search);
+const params =
+  new URLSearchParams(
+    window.location.search
+  );
 
-const playerId = Number(
-  params.get("id")
-);
+const playerId =
+  Number(params.get("id"));
 
 function updateScreen(isGreen) {
 
   if (isGreen) {
-    document.body.className = "green";
-    screen.textContent = "🟢";
-  } else {
-    document.body.className = "red";
-    screen.textContent = "🔴";
-  }
 
+    document.body.className =
+      "green";
+
+    screen.innerHTML =
+      `
+      <div>
+        🟢
+        <br>
+        P${playerId}
+      </div>
+      `;
+
+  } else {
+
+    document.body.className =
+      "red";
+
+    screen.innerHTML =
+      `
+      <div>
+        🔴
+        <br>
+        P${playerId}
+      </div>
+      `;
+
+  }
 }
 
 onValue(
   ref(db, "game"),
   (snapshot) => {
 
-    const data = snapshot.val();
+    const data =
+      snapshot.val();
 
     if (!data) {
+
       updateScreen(false);
+
       return;
     }
 
-    updateScreen(
-      data.greenPlayer === playerId
-    );
+    const greens =
+      data.greenPlayers || [];
 
+    updateScreen(
+      greens.includes(playerId)
+    );
   }
 );
